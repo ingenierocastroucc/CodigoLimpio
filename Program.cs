@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ToDo
 {
@@ -57,15 +58,23 @@ namespace ToDo
                 string line = Console.ReadLine();
                 // Remove one position
                 int indexToRemove = Convert.ToInt32(line) - 1;
-                if (indexToRemove > -1 && TaskList.Count > 0)
+                if (indexToRemove > (TaskList.Count - 1) || indexToRemove < 0)
                 {
-                     string task = TaskList[indexToRemove];
-                     TaskList.RemoveAt(indexToRemove);
-                     Console.WriteLine("Tarea " + task + " eliminada");
+                    Console.WriteLine("El numero de tarea seleccionado no se encuentra registrado en el sistema");
+                }
+                else 
+                {
+                    if (indexToRemove > -1 && TaskList.Count > 0)
+                    {
+                        string task = TaskList[indexToRemove];
+                        TaskList.RemoveAt(indexToRemove);
+                        Console.WriteLine("Tarea " + task + " eliminada");
+                    }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine("Ha ocurrido un errro al eliminar la tarea");
             }
         }
 
@@ -75,11 +84,19 @@ namespace ToDo
             {
                 Console.WriteLine("Ingrese el nombre de la tarea: ");
                 string task = Console.ReadLine();
-                TaskList.Add(task);
-                Console.WriteLine("Tarea registrada");
+                if (task != "")
+                {
+                    TaskList.Add(task);
+                    Console.WriteLine("Tarea registrada");
+                }
+                else 
+                {
+                    Console.WriteLine("La tarea no puede ser null");
+                }
             }
             catch (Exception)
             {
+                Console.WriteLine("Ah ocurrido un error registrando la tarea");
             }
         }
 
