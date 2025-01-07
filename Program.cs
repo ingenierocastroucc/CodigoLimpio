@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿
+      List<string> TaskList  = new List<string>();
 
-namespace ToDo
-{
-    internal class Program
-    {
-        public static List<string> TaskList { get; set; }
 
-        static void Main(string[] args)
-        {
-            TaskList = new List<string>();
             int MenuOption = 0;
             do
             {
@@ -28,12 +19,11 @@ namespace ToDo
                     ShowMenuTaskList();
                 }
             } while ((Menu)MenuOption != Menu.Exit);
-        }
         /// <summary>
         /// Show the main menu 
         /// </summary>
         /// <returns>Returns option indicated by user</returns>
-        public static int ShowMainMenu()
+        int ShowMainMenu()
         {
             Console.WriteLine("----------------------------------------");
             Console.WriteLine("Ingrese la opción a realizar: ");
@@ -47,7 +37,7 @@ namespace ToDo
             return Convert.ToInt32(line);
         }
 
-        public static void ShowMenuDelete()
+        void ShowMenuDelete()
         {
             try
             {
@@ -78,7 +68,7 @@ namespace ToDo
             }
         }
 
-        public static void ShowMenuAdd()
+        void ShowMenuAdd()
         {
             try
             {
@@ -100,9 +90,9 @@ namespace ToDo
             }
         }
 
-        public static void ShowMenuTaskList()
+        void ShowMenuTaskList()
         {
-            if (TaskList == null || TaskList.Count == 0)
+            if (TaskList?.Count <= 0)
             {
                 Console.WriteLine("No hay tareas por realizar");
             } 
@@ -110,11 +100,10 @@ namespace ToDo
             {
                 Console.WriteLine("----------------------------------------");
                 var indexTask = 1;
-                TaskList.ForEach(p => Console.WriteLine((indexTask++) + ". " + p));
+                TaskList.ForEach(p => Console.WriteLine($"{indexTask++} . {p}"));
                 Console.WriteLine("----------------------------------------");
             }
         }
-    }
 
     public enum Menu
     {
@@ -126,4 +115,4 @@ namespace ToDo
 
         Exit = 4
     }
-}
+
